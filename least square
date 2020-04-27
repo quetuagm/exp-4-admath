@@ -1,0 +1,40 @@
+xk=input('Input the value of x: ');
+
+n=4;
+y= [1,-2,2,3];
+x= [1,2,3,4];
+
+xs= sum(x);
+ys= sum(y);
+x2s= sum(x.^2);
+x3s= sum(x.^3);
+x4s= sum(x.^4);
+x5s= sum(x.^5);
+x6s= sum(x.^6);
+xys= sum(x.*y);
+x2ys=sum((x.^2).*(y));
+x3ys=sum((x.^3).*(y));
+
+
+%for linear sum
+ml= [(xs),(n);(x2s),(xs)];
+mml=[ys;xys];
+unl= ml\mml; %get a and b
+
+%for quadraric sum
+mq= [(x2s),(xs),(n);(x3s),(x2s),(xs);(x4s),(x3s),(x2s)];
+mmq=[ys;xys;x2ys];
+unq= mq\mmq; %get a b c
+
+%for cubic
+mc= [(x3s),(x2s),(xs),(n);(x4s),(x3s),(x2s),(xs);(x5s),(x4s),(x3s),(x2s);(x6s),(x5s),(x4s),(x3s)];
+mmc=[ys;xys;x2ys;x3ys];
+unc= mc\mmc; %get a b c d
+
+lyx=(unl(1).*xk)+unl(2);
+qyx=(unq(1).*xk^2)+(unq(2).*xk)+unq(3);
+cyx=(unc(1).*xk^3)+(unc(2).*xk^2)+(unc(3).*xk)+unc(4);
+
+fprintf('The value of f(%f) using Linear Approximation is %f \n', xk, lyx);
+fprintf('The value of f(%f) using Quadrat Approximation is %f \n', xk, qyx);
+fprintf('The value of f(%f) using Linear Approximation is %f \n', xk, cyx);
